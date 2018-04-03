@@ -1,6 +1,6 @@
 {
   "name": "gameNight",
-  "app_id": "",
+  "app_id": "45f03a74",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
