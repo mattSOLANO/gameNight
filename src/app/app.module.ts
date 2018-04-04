@@ -10,6 +10,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from 'angularfire2';
+import { firebaseConfig } from '../environment';
+import { AngularFirestore } from 'angularfire2/firestore';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -19,6 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig, 'game-night')
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,6 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage
   ],
   providers: [
+    AngularFirestore,
     BarcodeScanner,
     StatusBar,
     SplashScreen,

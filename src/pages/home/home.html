@@ -13,6 +13,13 @@
   <button ion-button (click)="scan()">Scan</button>
   <div *ngIf="scanData">
     <p>Scanned Text: {{scanData.text}}</p>
-    <p>Scanned Format: {{scanData.format}}</p>
+  </div>
+
+  <hr />
+
+  <div>
+    <ion-item *ngFor="let game of games | async">
+      {{ game.name }}
+    </ion-item>
   </div>
 </ion-content>
