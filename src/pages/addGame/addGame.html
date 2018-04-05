@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Add Game</ion-title>
+    </ion-navbar>
+    </ion-header>
+
+<ion-content padding>
+
+    <button ion-button icon-left round (click)="scan()">
+        <ion-icon name="camera"></ion-icon>
+        Scan
+    </button>
+
+    <div *ngIf="newGame">
+        <form [formGroup]="gameForm" (ngSubmit)="save()" novalidate="">
+            <ion-list no-lines>
+                <ion-item>
+                    <ion-label stacked>Title</ion-label>
+                    <ion-input type="text" [(ngModel)]="newGame.title" formControlName="title"></ion-input>
+                </ion-item>
+            
+                <ion-item>
+                    <ion-label stacked>Minimum Players</ion-label>
+                    <ion-input type="number" [(ngModel)]="newGame.minPlayers" formControlName="minPlayers"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label stacked>Maximum Players</ion-label>
+                    <ion-input type="number" [(ngModel)]="newGame.maxPlayers" formControlName="maxPlayers"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label stacked>Duration</ion-label>
+                    <ion-input type="number" [(ngModel)]="newGame.duration" formControlName="duration"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label stacked>UPC</ion-label>
+                    <ion-input type="text" [readonly]="true" [(ngModel)]="newGame.upc" formControlName="upc"></ion-input>
+                </ion-item>
+            </ion-list>
+
+            <button ion-button full type="submit" [disabled]="!gameForm.valid">Save Game</button>
+        </form>
+
+    </div>
+</ion-content>

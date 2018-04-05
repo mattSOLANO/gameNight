@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{game.title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <p item-start>Duration</p>
+            <h2 item-end>{{game.duration}} minutes</h2>
+        </ion-item>
+        <ion-item>
+            <p item-start>Players</p>
+            <h2 item-end>{{game.minPlayers}} - {{game.maxPlayers}}</h2>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button color="danger" outline (click)="delete()">Delete Game</button>
+</ion-content>

@@ -5,6 +5,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { AddGamePage } from "../pages/addGame/addGame";
+import { GameDetailsPage } from "../pages/gameDetails/gameDetails";
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -18,7 +20,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    AddGamePage,
+    GameDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    AddGamePage,
+    GameDetailsPage
   ],
   providers: [
     AngularFirestore,

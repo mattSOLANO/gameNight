@@ -1,37 +1,39 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from "rxjs/Observable";
+
+import { Game } from "../../shared/game.model";
+import { GameDetailsPage } from '../gameDetails/gameDetails';
 
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+    selector: 'page-list',
+    templateUrl: 'list.html'
 })
 export class ListPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+    selectedGame: any;
+    gamesCollection: AngularFirestoreCollection<Game>;
+    games: Observable<Game[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+    constructor(
+        public navCtrl: NavController,
+        public afs: AngularFirestore
+    ) {
 
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
+        this.gamesCollection = afs.collection('games');
+        this.games = this.gamesCollection.snapshotChanges().map(actions => {
+            return actions.map(a => {
+                const data = a.payload.doc.data() as Game;
+                const id = a.payload.doc.id;
+                return {id, ...data};
+            });
+        });
 
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
     }
-  }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ListPage, {
-      item: item
-    });
-  }
+    selectGame(event, item) {
+        this.navCtrl.push(GameDetailsPage, {
+            game: item
+        });
+    }
 }
